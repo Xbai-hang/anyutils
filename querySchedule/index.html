@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <title>林小课表</title>
+</head>
+<body>
+<div id="app">
+    <div id="introduce">
+        <p>中南林业科技大学课表查询</p>
+    </div>
+    <!--选择参数-->
+    <hr style="border:3 double #987cb9" width="100%" color=#987cb9 SIZE=5>
+    <div id="select">
+        <select v-model="selected[0]" name="check_grade">
+            <option v-for="(item,index) in grade" :value="index">{{item}}</option>
+        </select>
+        <select v-model="selected[1]" name="check_major">
+            <option v-for="(item,index) in major" :value="index">{{item}}</option>
+        </select>
+        <select v-model="selected[2]" name="scheck_class">
+            <option v-for="(item,index) in classname" :value="index">{{item}}</option>
+        </select>
+        <input type="button" @click="search" value="查询"/>
+        <input type="reset" @click="reset" value="重置" />
+    </div>
+    <hr style="border:3 double #987cb9" width="100%" color=#987cb9 SIZE=3>
+    <!--展示页面-->
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th v-for="th in weekdays">{{th}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template v-for="(item,index_1) in times ">
+                    <tr>
+                        <td>{{item}}</td>
+                        <td v-for="index_2 in 7" v-show="clicked" v-html="database.data[index_1][index_2-1]"></td>
+                    </tr>
+                </template>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>
+</div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>
