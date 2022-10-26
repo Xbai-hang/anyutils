@@ -1,0 +1,11 @@
+# 运行：docker-compose up -d --build
+# 清除容器：docker-compose down -v
+version: "3.8"
+services:
+  node-server:
+    build: .
+    ports:
+      - "18888:3000" # 本地主机端口 -> 容器开放端口
+    volumes:
+      - ./:/xbai:ro
+      - /xbai/node_modules # 该文件夹及其子目录不同步更新
